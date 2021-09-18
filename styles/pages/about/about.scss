@@ -7,4 +7,9 @@
 .about__title {
   @extend %title-100;
   text-align: center;
+  margin: auto;
+
+  @include media("<phone") {
+    max-width: 72rem;
+  }
 }

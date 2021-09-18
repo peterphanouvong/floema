@@ -1,6 +1,10 @@
 .detail__information {
   color: $color-white;
   padding-left: 8.28rem;
+
+  @include media("<phone") {
+    padding-left: 0;
+  }
 }
 
 .detail__information__collection {
@@ -16,6 +20,9 @@
 
 .detail__information__content {
   padding-left: 18rem;
+  @include media("<phone") {
+    padding-left: 0;
+  }
 }
 
 .detail__information__highlights {
@@ -29,10 +36,16 @@
 }
 
 .detail__information__highlight__icon {
-  border: 1px solid $color-white;
   border-radius: 50%;
   height: 4rem;
+  margin-right: 3.75rem;
   width: 4rem;
+
+  @include media("<phone") {
+    height: 9rem;
+    margin-right: 5.8rem;
+    width: 9rem;
+  }
 }
 
 .detail__information__highlight__text {
@@ -56,8 +69,13 @@
 
 .detail__information__item__title {
   @extend %description-12;
-  width: 6rem;
+  opacity: 0.4;
   padding-top: 0.6rem;
+  width: 6rem;
+
+  @include media("<phone") {
+    width: 15rem;
+  }
 }
 
 .detail__information__item__description {

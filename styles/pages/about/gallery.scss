@@ -11,6 +11,10 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  @include media("<phone") {
+    height: 51.4rem;
+  }
 }
 .about__gallery__wrapper {
   align-items: center;

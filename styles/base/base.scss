@@ -9,6 +9,10 @@ html {
   @include media(">desktop") {
     font-size: 10px;
   }
+
+  @include media("<phone") {
+    font-size: calc(100vw / 750) * 10;
+  }
 }
 
 body {

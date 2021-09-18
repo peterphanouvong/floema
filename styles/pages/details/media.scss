@@ -2,6 +2,12 @@
   height: 78.2rem;
   position: relative;
   width: 55.4rem;
+
+  @include media("<phone") {
+    height: 93.4rem;
+    margin: 0 auto 7.8rem auto;
+    width: 100%;
+  }
 }
 
 .detail__media__image {

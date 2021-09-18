@@ -24,3 +24,9 @@ block content
           article.collections__content__article(class=`${index==0 ? 'collections__content__article--active' : ''}`)
             h2.collections__content__title=`${collection.data.title} ${home.data.label}`
             p.collections__content__description=collection.data.description
+
+      .collections__mobile
+        each collection, index in collections
+          .collections__mobile__item
+            .collections__mobile__item__label!=`${home.data.label} <br/> ${Numbers(index)}`
+            .collections__mobile__item__title=collection.data.title

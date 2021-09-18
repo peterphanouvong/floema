@@ -3,11 +3,22 @@
   @extend %cover;
 
   background-color: $color-quicksand;
+
+  @include media("<phone") {
+    height: auto;
+  }
 }
 
 .detail__wrapper {
   align-items: center;
   display: flex;
+
+  @include media("<phone") {
+    display: block;
+    margin: auto;
+    padding: 17rem 0 25rem;
+    width: 66.1rem;
+  }
 }
 
 .detail__button {
@@ -19,6 +30,12 @@
   transform: translateX(-50%);
   width: 12.4rem;
   z-index: 2;
+
+  @include media("<phone") {
+    height: 13rem;
+    width: 26.8rem;
+    bottom: 7rem;
+  }
 }
 
 .detail__button__icon {

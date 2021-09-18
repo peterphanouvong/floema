@@ -18,6 +18,15 @@
 
   .about__highlight:nth-child(4) & {
     width: 104rem;
+
+    @include media("<phone") {
+      width: 100%;
+    }
+  }
+
+  @include media("<phone") {
+    height: 270rem;
+    width: 54rem;
   }
 }
 
@@ -31,6 +40,11 @@
   text-transform: uppercase;
   transform: translateX(-50%);
   width: 9.6rem;
+
+  @include media("<phone") {
+    padding-top: 88rem;
+    width: 21rem;
+  }
 }
 
 .about__highlight__title {
