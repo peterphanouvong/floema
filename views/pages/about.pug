@@ -11,7 +11,7 @@ block content
         .about__gallery__wrapper
           each media in about.data.gallery
             figure.about__gallery__media
-              img.about__gallery__media__image(alt=media.image.alt src=media.image.url)
+              img.about__gallery__media__image(alt=media.image.alt data-src=media.image.url)
 
       h2.about__title!=about.data.title.replace(/\n/g, '<br/>')
 
@@ -28,7 +28,7 @@ block content
                 .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description).replace(/<\/p>/g, "</p><br/>")
 
               figure.about__content__media
-                img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
+                img.about__content__media__image(alt=section.primary.image.alt data-src=section.primary.image.url)
 
         if section.slice_type == 'highligh'
           section.about__highlight
@@ -41,11 +41,11 @@ block content
               .highlight-medias
                 each media in section.items
                   figure.about__highlight__media
-                    img.about__highlight__media__image(alt=media.image.alt src=media.image.url)
+                    img.about__highlight__media__image(alt=media.image.alt data-src=media.image.url)
 
         if section.slice_type == 'gallery'
           section.about__gallery
             .about__gallery__wrapper
               each media in section.items
                 figure.about__gallery__media
-                  img.about__gallery__media__image(alt=media.image.alt src=media.image.url)
+                  img.about__gallery__media__image(alt=media.image.alt data-src=media.image.url)
