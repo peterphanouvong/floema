@@ -1,5 +1,10 @@
 .detail__media {
+  height: 78.2rem;
+  position: relative;
+  width: 55.4rem;
 }
 
 .detail__media__image {
+  @extend %cover;
+  object-fit: cover;
 }

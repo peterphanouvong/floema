@@ -1,8 +1,23 @@
 .collections__content {
+  @extend %cover;
 }
 .collections__content__article {
+  top: 80%;
+  left: 8rem;
+  opacity: 0;
+  position: absolute;
+
+  &--active {
+    opacity: 1;
+  }
 }
 .collections__content__title {
+  @extend %title-60;
+  color: $color-quarter-spanish-white;
+  margin-bottom: 2rem;
 }
 .collections__content__description {
+  @extend %description-16;
+  color: $color-quarter-spanish-white;
+  max-width: 44rem;
 }

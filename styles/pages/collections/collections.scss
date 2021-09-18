@@ -1,4 +1,10 @@
 .collections {
+  @extend %cover;
+  background-color: $color-quicksand;
+  color: $color-quarter-spanish-white;
 }
 .collections__wrapper {
+  @extend %cover;
+  align-items: center;
+  overflow: hidden;
 }

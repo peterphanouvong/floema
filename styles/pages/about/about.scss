@@ -1,6 +1,10 @@
 .about {
+  background-color: $color-cadet-blue;
+  color: $color-bright-gray;
 }
 .about__wrapper {
 }
 .about__title {
+  @extend %title-100;
+  text-align: center;
 }

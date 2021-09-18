@@ -1,8 +1,11 @@
 .home__titles {
+  @extend %vertical__titles;
 }
 
-.home__titles_label {
+.home__titles__label {
+  @extend %vertical__titles__label;
 }
 
 .home__titles__title {
+  @extend %vertical__titles__title;
 }

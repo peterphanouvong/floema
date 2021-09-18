@@ -1,6 +1,9 @@
 .collections__titles {
+  @extend %vertical__titles;
 }
-.collections__titles_label {
+.collections__titles__label {
+  @extend %vertical__titles__label;
 }
 .collections__titles__title {
+  @extend %vertical__titles__title;
 }
