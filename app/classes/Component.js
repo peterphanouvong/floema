@@ -9,13 +9,14 @@ class Component extends EventEmitter {
     this.selectorChildren = { ...elements };
     this.create();
     this.addEventListeners();
-
-    console.log("element", this.element);
-    console.log("elements", this.elements);
   }
 
   create() {
-    this.element = document.querySelector(this.selector);
+    if (this.selector instanceof HTMLElement) {
+      this.element = this.selector;
+    } else {
+      this.element = document.querySelector(this.selector);
+    }
     this.elements = {};
 
     each(this.selectorChildren, (selector, name) => {

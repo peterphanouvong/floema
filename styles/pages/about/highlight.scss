@@ -20,6 +20,7 @@
     width: 104rem;
 
     @include media("<phone") {
+      height: 119.3rem;
       width: 100%;
     }
   }

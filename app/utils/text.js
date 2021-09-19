@@ -1,5 +1,26 @@
 import each from "lodash/each";
 
+export function splitChars({ element }) {
+  const rawLines = element.innerHTML.toString().trim().split("<br>");
+  let innerHTML = "";
+  rawLines.forEach((line) => {
+    const string = line
+      .split("")
+      .map((c) => {
+        if (c === " ") return c;
+        return `<span>${c}</span>`;
+      })
+      .join("");
+    innerHTML += `<span data-class="line">${string}</span><br>`;
+  });
+
+  element.innerHTML = innerHTML;
+  const chars = element.querySelectorAll("span span");
+  const lines = element.querySelectorAll('[data-class="line"]');
+
+  return { chars, lines };
+}
+
 export function split({ element, expression = " ", append = true }) {
   const words = splitText(element.innerHTML.toString().trim(), expression);
 
@@ -128,5 +149,19 @@ function parseLine(line) {
     return line === "<br>"
       ? "<br>"
       : `<span>${line}</span>` + (line.length > 1 ? " " : "");
+  }
+}
+
+function parseLineToChar(line) {
+  line = line.trim();
+
+  if (line === "" || line === " ") {
+    return line;
+  } else {
+    return line === "<br>"
+      ? "<br>"
+      : line.split("").map((c) => {
+          return `<span>${c}</span>`;
+        });
   }
 }

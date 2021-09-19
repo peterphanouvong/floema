@@ -25,3 +25,14 @@
     width: 100%;
   }
 }
+
+%page {
+  @extend %cover;
+}
+
+%page__wrapper {
+  color: inherit;
+}
+
+%content {
+}

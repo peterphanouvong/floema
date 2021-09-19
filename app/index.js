@@ -8,6 +8,7 @@ import Preloader from "./components/Preloader";
 
 class App {
   constructor() {
+    this.update();
     this.createPreloader();
     this.createContent();
     this.createPages();
@@ -34,12 +35,11 @@ class App {
 
     this.page = this.pages[this.template];
     this.page.create();
-    this.page.show();
   }
 
   onPreloaded() {
     this.preloader.destroy();
-    // this.page.show();
+    this.page.show();
   }
 
   async onChange(url) {
@@ -70,15 +70,22 @@ class App {
     }
   }
 
+  update() {
+    if (this.page && this.page.update) {
+      this.page.update();
+    }
+    this.frame = window.requestAnimationFrame(this.update.bind(this));
+  }
+
   addLinkListeners() {
     const links = document.querySelectorAll("a");
     each(links, (link) => {
-      link.addEventListener("click", (event) => {
+      link.onclick = (event) => {
         event.preventDefault();
         const { href } = link;
 
         this.onChange(href);
-      });
+      };
     });
   }
 }

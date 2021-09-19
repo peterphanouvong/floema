@@ -17,17 +17,15 @@ class Preloader extends Component {
 
     split({
       element: this.elements.text,
-      expression: "<br/>",
+      expression: "<br>",
     });
 
     split({
       element: this.elements.text,
-      expression: "<br/>",
+      expression: "<br>",
     });
 
     this.elements.titleSpans = this.elements.text.querySelectorAll("span span");
-
-    console.log(this.elements.titleSpans);
 
     this.length = 0;
     this.createLoader();

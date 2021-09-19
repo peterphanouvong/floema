@@ -16,10 +16,6 @@ class Home extends Page {
 
   create() {
     super.create();
-
-    this.elements.button.addEventListener("click", () =>
-      console.log("You clicked da button idiot")
-    );
   }
 }
 

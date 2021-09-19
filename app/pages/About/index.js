@@ -2,7 +2,13 @@ import Page from "classes/Page";
 
 class About extends Page {
   constructor() {
-    super({ element: ".about", id: "about" });
+    super({
+      elements: {
+        wrapper: ".about__wrapper",
+      },
+      element: ".about",
+      id: "about",
+    });
   }
 }
 

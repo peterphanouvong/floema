@@ -1,7 +1,6 @@
 .detail {
   @extend %center;
-  @extend %cover;
-
+  @extend %page;
   background-color: $color-quicksand;
 
   @include media("<phone") {
