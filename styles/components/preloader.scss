@@ -1,6 +1,36 @@
 .preloader {
+  @extend %center;
+  @extend %cover;
+
+  background-color: $color-contessa;
+  color: $color-white;
+  display: flex;
+  // display: none;
+  z-index: z("preloader");
 }
+
 .preloader__text {
+  text-align: center;
+
+  span {
+    display: inline-block;
+    overflow: hidden;
+  }
+  span span {
+    @extend %title-53;
+  }
 }
+
 .preloader__number {
+  bottom: 7.3rem;
+  display: inline-block;
+  font-size: 0;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.preloader__number__text {
+  @extend %description-14;
 }

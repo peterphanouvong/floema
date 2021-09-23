@@ -1,4 +1,63 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  @extend %cover;
+  font-size: calc(100vw / 1920) * 10;
+  position: fixed;
+  @include media(">desktop") {
+    font-size: 10px;
+  }
+
+  @include media("<phone") {
+    font-size: calc(100vw / 750) * 10;
+  }
+}
+
 body {
+  @extend %cover;
   @extend %description-16;
+
   font-family: $font-suisse-bp;
+  position: fixed;
+}
+
+a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  vertical-align: middle;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.content {
+  @extend %cover;
+}
+
+[data-animation="title"],
+[data-animation="paragraph"] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
 }

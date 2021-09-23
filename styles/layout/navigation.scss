@@ -1,14 +1,54 @@
 .navigation {
+  @extend %cover;
+  color: $color-quarter-spanish-white;
+  pointer-events: none;
+  position: fixed;
+  z-index: z("navigation");
 }
-.navigation__wrapper {
-}
+
 .navigation__link {
+  left: 4rem;
+  height: 2rem;
+  font-size: 0;
+  pointer-events: auto;
+  position: absolute;
+  top: 4rem;
+  width: 12.8rem;
+
+  @include media("<phone") {
+    height: 4rem;
+    left: 4rem;
+    top: 6.1rem;
+    width: 27.9rem;
+  }
 }
+
 .navigation__link__icon {
+  @extend %cover;
+
+  transition: opacity 0.4s ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
+
 .navigation__list {
 }
+
 .navigation__list__item {
+  position: absolute;
+  right: 4rem;
+  top: 4rem;
+
+  @include media("<phone") {
+    right: 5rem;
+    top: 6.5rem;
+  }
 }
+
 .navigation__list__link {
+  @extend %link--hidden;
+  @extend %title-20;
+  pointer-events: auto;
 }

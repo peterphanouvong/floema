@@ -1,7 +1,10 @@
 .home_gallery {
+  @extend %cover;
+  display: none;
 }
 
 .home__gallery__media {
+  position: absolute;
 }
 
 .home__gallery__media__image {

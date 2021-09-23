@@ -2,9 +2,12 @@
 @import "./utils/functions.scss";
 @import "./utils/mixins.scss";
 @import "./utils/vendors.scss";
+@import "./utils/responsive.scss";
 
 @import "./shared/descriptions.scss";
+@import "./shared/link.scss";
 @import "./shared/titles.scss";
+@import "./shared/vertical-titles.scss";
 
 @import "./base/fonts.scss";
 @import "./base/reset.scss";

@@ -1,4 +1,8 @@
 .collections {
+  @extend %page;
 }
 .collections__wrapper {
+  @extend %cover;
+  align-items: center;
+  overflow: hidden;
 }

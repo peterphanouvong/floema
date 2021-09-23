@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+%center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 @mixin ratio($height, $width) {
   font-size: 0;
   overflow: hidden;
@@ -18,4 +24,18 @@
     padding-top: $width / $height * 100%;
     width: 100%;
   }
+}
+
+%page {
+  @extend %cover;
+
+  opacity: 0;
+  visibility: hidden;
+}
+
+%page__wrapper {
+  color: inherit;
+}
+
+%content {
 }

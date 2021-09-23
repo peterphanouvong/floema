@@ -1,8 +1,59 @@
 .collections__content {
+  @extend %cover;
+
+  @include media("<phone") {
+    display: none;
+  }
 }
+
 .collections__content__article {
+  top: 80%;
+  left: 8rem;
+  opacity: 0;
+  position: absolute;
+
+  &--active {
+    opacity: 1;
+  }
 }
+
 .collections__content__title {
+  @extend %title-60;
+  color: $color-quarter-spanish-white;
+  margin-bottom: 2rem;
+
+  @include media("<phone") {
+    bottom: 10rem;
+  }
 }
+
 .collections__content__description {
+  @extend %description-16;
+  color: $color-quarter-spanish-white;
+  max-width: 44rem;
+}
+
+.collections__mobile {
+  bottom: 5rem;
+  display: none;
+  position: absolute;
+
+  @include media("<phone") {
+    display: flex;
+  }
+}
+.collections__mobile__item {
+  padding-left: 5rem;
+  width: 100vw;
+}
+.collections__mobile__item__label {
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 5rem;
+  text-transform: uppercase;
+  line-height: 2.8rem;
+}
+.collections__mobile__item__title {
+  font-family: $font-george-x;
+  font-size: 12rem;
 }

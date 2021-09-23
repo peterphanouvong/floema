@@ -1,6 +1,14 @@
 .about {
+  @extend %page;
 }
 .about__wrapper {
 }
 .about__title {
+  @extend %title-100;
+  margin: auto;
+  text-align: center;
+
+  @include media("<phone") {
+    max-width: 72rem;
+  }
 }
