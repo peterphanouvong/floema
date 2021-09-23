@@ -1,11 +1,12 @@
 import Page from "classes/Page";
+import Button from "../../components/Button";
 
 class Home extends Page {
   constructor() {
     super({
       element: ".home",
       elements: {
-        button: document.querySelector(".home__link"),
+        button: ".home__link",
         titles: ".home__titles",
         gallery: ".home_gallery",
         navigation: ".navigation",
@@ -16,6 +17,13 @@ class Home extends Page {
 
   create() {
     super.create();
+    console.log(this.elements);
+    this.link = new Button(this.elements.button);
+  }
+
+  destroy() {
+    super.destroy();
+    this.link.removeEventListeners();
   }
 }
 

@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import Animation from "../classes/Animation";
-import { split, calculate, splitChars } from "../utils/text";
+import { splitChars } from "../utils/text";
 
 class Title extends Animation {
   constructor({ element, elements }) {
@@ -8,9 +8,6 @@ class Title extends Animation {
 
     const { lines } = splitChars({ element });
     this.lines = lines;
-
-    this.elementCharacters = this.element.querySelectorAll("span span");
-    console.log(this.elementCharacters);
   }
 
   animateIn() {
@@ -27,11 +24,11 @@ class Title extends Animation {
           y: "100%",
         },
         {
-          delay: index * 0.3,
+          delay: index * 0.2,
           duration: 1.2,
-          ease: "elastic.out(0.4, 0.6)",
+          ease: "elastic.out(0.3, 0.6)",
           stagger: {
-            amount: 0.2,
+            amount: 0.1,
             from: "random",
           },
           y: "0%",

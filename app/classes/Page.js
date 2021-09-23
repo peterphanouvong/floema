@@ -1,10 +1,14 @@
 import GSAP from "gsap";
 import each from "lodash/each";
+import map from "lodash/map";
 import normalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
-import map from "lodash/map";
-import Title from "../animations/Title";
+import Highlight from "../animations/Highlight";
 import Paragraph from "../animations/Paragraph";
+import Title from "../animations/Title";
+import AsyncLoad from "./AsyncLoad";
+import { ColorsManager } from "./Colors";
+
 class Page {
   constructor({ element, elements, id }) {
     this.selector = element;
@@ -12,6 +16,9 @@ class Page {
       ...elements,
       animationsTitles: '[data-animation="title"]',
       animationsParagraphs: '[data-animation="paragraph"]',
+      animationsHighlights: '[data-animation="highlight"]',
+
+      preloaders: "[data-src]",
     };
     this.id = id;
     this.transformPrefix = Prefix("transform");
@@ -50,8 +57,14 @@ class Page {
     };
     this.onResize();
 
-    // this.addEventListeners();
     this.createAnimations();
+    this.createPreloader();
+  }
+
+  createPreloader() {
+    this.preloaders = map(this.elements.preloaders, (element) => {
+      return new AsyncLoad({ element });
+    });
   }
 
   createAnimations() {
@@ -73,10 +86,25 @@ class Page {
     );
 
     this.animations.push(...this.animationsParagraphs);
+
+    // Highlights.
+    this.animationsHighlights = map(
+      this.elements.animationsHighlights,
+      (element) => {
+        return new Highlight({ element });
+      }
+    );
+
+    this.animations.push(...this.animationsHighlights);
   }
 
   show() {
     return new Promise((resolve) => {
+      ColorsManager.change({
+        backgroundColor: this.element.getAttribute("data-background"),
+        color: this.element.getAttribute("data-color"),
+      });
+
       this.animateIn = GSAP.timeline();
 
       this.animateIn.fromTo(
@@ -99,7 +127,7 @@ class Page {
 
   hide() {
     return new Promise((resolve) => {
-      this.removeEventListeners();
+      this.destroy();
       this.animateOut = GSAP.timeline();
 
       this.animateOut.to(this.element, {
@@ -128,6 +156,10 @@ class Page {
         this.transformPrefix
       ] = `translateY(-${this.scroll.current}px)`;
     }
+  }
+
+  destroy() {
+    this.removeEventListeners();
   }
 
   /**

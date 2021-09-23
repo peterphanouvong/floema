@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import Animation from "../classes/Animation";
 import { split, calculate } from "../utils/text";
-import CustomEase from "../utils/CustomEase";
 
 class Paragraph extends Animation {
   constructor({ element, elements }) {

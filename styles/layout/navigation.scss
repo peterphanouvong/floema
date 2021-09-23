@@ -25,6 +25,12 @@
 
 .navigation__link__icon {
   @extend %cover;
+
+  transition: opacity 0.4s ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .navigation__list {
@@ -42,6 +48,7 @@
 }
 
 .navigation__list__link {
+  @extend %link--hidden;
   @extend %title-20;
   pointer-events: auto;
 }

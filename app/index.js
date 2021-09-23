@@ -5,14 +5,26 @@ import Home from "./pages/Home";
 
 import each from "lodash/each";
 import Preloader from "./components/Preloader";
+import Navigation from "./components/Navigation";
 
 class App {
   constructor() {
-    this.update();
-    this.createPreloader();
     this.createContent();
+    this.createPreloader();
+    this.createNavigation();
     this.createPages();
+
     this.addLinkListeners();
+
+    this.update();
+  }
+
+  /**
+   * CRUD.
+   */
+
+  createNavigation() {
+    this.navigation = new Navigation({ template: this.template });
   }
 
   createPreloader() {
@@ -37,6 +49,17 @@ class App {
     this.page.create();
   }
 
+  update() {
+    if (this.page && this.page.update) {
+      this.page.update();
+    }
+    this.frame = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  /**
+   * Events.
+   */
+
   onPreloaded() {
     this.preloader.destroy();
     this.page.show();
@@ -56,6 +79,8 @@ class App {
 
       this.template = divContent.getAttribute("data-template");
 
+      this.navigation.onChange(this.template);
+
       this.content.setAttribute("data-template", this.template);
 
       this.content.innerHTML = divContent.innerHTML;
@@ -68,13 +93,6 @@ class App {
     } else {
       console.log("error");
     }
-  }
-
-  update() {
-    if (this.page && this.page.update) {
-      this.page.update();
-    }
-    this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   addLinkListeners() {

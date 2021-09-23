@@ -4,7 +4,7 @@ block variables
   - var template = "about"
 
 block content
-  .about
+  .about(data-background="#b2b8c3" data-color="#37384c")
     .about__wrapper
 
       section.about__gallery
@@ -31,7 +31,7 @@ block content
                 img.about__content__media__image(alt=section.primary.image.alt data-src=section.primary.image.url)
 
         if section.slice_type == 'highligh'
-          section.about__highlight
+          section.about__highlight(data-animation="highlight")
             .about__highlight_wrapper
               if section.primary.label
                 p.about__highlight__label=section.primary.label

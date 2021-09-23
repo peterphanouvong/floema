@@ -9,13 +9,44 @@
 */
 
 /*!
- * CustomEase 3.8.0
+ * CSSRulePlugin 3.7.1
  * https://greensock.com
  *
- * @license Copyright 2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * Draggable 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
  */
+
+/*!
+ * EasePack 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * EaselPlugin 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
 
 /*!
  * GSAP 3.7.1
@@ -27,27 +58,125 @@
  * @author: Jack Doyle, jack@greensock.com
 */
 
+/*!
+ * PixiPlugin 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * ScrollToPlugin 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * ScrollTrigger 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * TextPlugin 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * matrix 3.7.1
+ * https://greensock.com
+ *
+ * Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * paths 3.7.1
+ * https://greensock.com
+ *
+ * Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * strings: 3.7.1
+ * https://greensock.com
+ *
+ * Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*! ../../components/Button */
+
+/*! ../animations/Highlight */
+
 /*! ../animations/Paragraph */
 
 /*! ../animations/Title */
 
 /*! ../classes/Animation */
 
+/*! ../classes/Component */
+
 /*! ../modules/logger/index.js */
 
-/*! ../utils/CustomEase */
+/*! ../utils/color */
 
 /*! ../utils/log.js */
 
 /*! ../utils/text */
 
+/*! ./AsyncLoad */
+
 /*! ./CSSPlugin.js */
 
+/*! ./CSSRulePlugin.js */
+
+/*! ./Colors */
+
 /*! ./Component */
+
+/*! ./Draggable.js */
+
+/*! ./EasePack.js */
+
+/*! ./EaselPlugin.js */
 
 /*! ./ExecutionEnvironment */
 
 /*! ./Logger */
+
+/*! ./MotionPathPlugin.js */
+
+/*! ./PixiPlugin.js */
+
+/*! ./ScrollToPlugin.js */
+
+/*! ./ScrollTrigger.js */
+
+/*! ./TextPlugin.js */
 
 /*! ./UserAgent_DEPRECATED */
 
@@ -257,6 +386,8 @@
 
 /*! ./clients/WebSocketClient.js */
 
+/*! ./components/Navigation */
+
 /*! ./components/Preloader */
 
 /*! ./createConsoleLogger */
@@ -355,11 +486,17 @@
 
 /*! ./utils/log.js */
 
+/*! ./utils/matrix.js */
+
 /*! ./utils/parseURL.js */
+
+/*! ./utils/paths.js */
 
 /*! ./utils/reloadApp.js */
 
 /*! ./utils/sendMessage.js */
+
+/*! ./utils/strings.js */
 
 /*! ansi-html-community */
 
@@ -372,6 +509,8 @@
 /*! events */
 
 /*! gsap */
+
+/*! gsap/all */
 
 /*! html-entities */
 
@@ -413,9 +552,17 @@
   !*** ./styles/index.scss ***!
   \***************************/
 
+/*!****************************!*\
+  !*** ./app/utils/color.js ***!
+  \****************************/
+
 /*!*****************************!*\
   !*** ./app/classes/Page.js ***!
   \*****************************/
+
+/*!*******************************!*\
+  !*** ./app/classes/Colors.js ***!
+  \*******************************/
 
 /*!*********************************!*\
   !*** ./app/animations/Title.js ***!
@@ -423,10 +570,6 @@
 
 /*!*********************************!*\
   !*** ./app/pages/Home/index.js ***!
-  \*********************************/
-
-/*!*********************************!*\
-  !*** ./app/utils/CustomEase.js ***!
   \*********************************/
 
 /*!*********************************!*\
@@ -438,11 +581,23 @@
   \**********************************/
 
 /*!**********************************!*\
+  !*** ./app/classes/AsyncLoad.js ***!
+  \**********************************/
+
+/*!**********************************!*\
   !*** ./app/classes/Component.js ***!
   \**********************************/
 
 /*!**********************************!*\
+  !*** ./app/components/Button.js ***!
+  \**********************************/
+
+/*!**********************************!*\
   !*** ./app/pages/About/index.js ***!
+  \**********************************/
+
+/*!**********************************!*\
+  !*** ./node_modules/gsap/all.js ***!
   \**********************************/
 
 /*!**********************************!*\
@@ -470,6 +625,10 @@
   \************************************/
 
 /*!*************************************!*\
+  !*** ./app/animations/Highlight.js ***!
+  \*************************************/
+
+/*!*************************************!*\
   !*** ./app/animations/Paragraph.js ***!
   \*************************************/
 
@@ -494,6 +653,10 @@
   \*************************************/
 
 /*!**************************************!*\
+  !*** ./app/components/Navigation.js ***!
+  \**************************************/
+
+/*!**************************************!*\
   !*** ./node_modules/lodash/_Hash.js ***!
   \**************************************/
 
@@ -514,6 +677,10 @@
   \***************************************/
 
 /*!***************************************!*\
+  !*** ./node_modules/gsap/EasePack.js ***!
+  \***************************************/
+
+/*!***************************************!*\
   !*** ./node_modules/lodash/_Stack.js ***!
   \***************************************/
 
@@ -531,6 +698,10 @@
 
 /*!****************************************!*\
   !*** ./node_modules/gsap/CSSPlugin.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/gsap/Draggable.js ***!
   \****************************************/
 
 /*!****************************************!*\
@@ -556,6 +727,14 @@
 /*!****************************************!*\
   !*** ./node_modules/lodash/memoize.js ***!
   \****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/gsap/PixiPlugin.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/gsap/TextPlugin.js ***!
+  \*****************************************/
 
 /*!*****************************************!*\
   !*** ./node_modules/lodash/_Promise.js ***!
@@ -634,6 +813,14 @@
   \*****************************************/
 
 /*!******************************************!*\
+  !*** ./node_modules/gsap/EaselPlugin.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/gsap/utils/paths.js ***!
+  \******************************************/
+
+/*!******************************************!*\
   !*** ./node_modules/lodash/_DataView.js ***!
   \******************************************/
 
@@ -702,6 +889,10 @@
   \******************************************/
 
 /*!*******************************************!*\
+  !*** ./node_modules/gsap/utils/matrix.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
   !*** ./node_modules/lodash/_ListCache.js ***!
   \*******************************************/
 
@@ -756,6 +947,18 @@
 /*!********************************************!*\
       !*** ./client-src/modules/logger/index.js ***!
       \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/gsap/CSSRulePlugin.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/gsap/ScrollTrigger.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/gsap/utils/strings.js ***!
+  \********************************************/
 
 /*!********************************************!*\
   !*** ./node_modules/lodash/_Uint8Array.js ***!
@@ -828,6 +1031,10 @@
 /*!********************************************!*\
   !*** ./node_modules/querystring/encode.js ***!
   \********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/gsap/ScrollToPlugin.js ***!
+  \*********************************************/
 
 /*!*********************************************!*\
   !*** ./node_modules/lodash/_arrayFilter.js ***!
@@ -940,6 +1147,10 @@
 /*!**********************************************!*\
   !*** ./node_modules/lodash/_stringToPath.js ***!
   \**********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/gsap/MotionPathPlugin.js ***!
+  \***********************************************/
 
 /*!***********************************************!*\
   !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
