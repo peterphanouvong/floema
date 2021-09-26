@@ -3,7 +3,6 @@ import Component from "../classes/Component";
 
 export default class Button extends Component {
   constructor(element) {
-    console.log(element);
     super({ element });
 
     this.path = element.querySelector("path:last-child");

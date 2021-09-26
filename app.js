@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const app = express();
 const path = require("path");
 const port = 3000;
+const uaParser = require("ua-parser-js");
 
 app.use(logger("dev"));
 app.use(methodOverride());
@@ -29,6 +30,12 @@ const handleLinkResolver = (doc) => {
 };
 
 app.use((req, res, next) => {
+  const ua = uaParser(req.headers["user-agent"]);
+
+  res.locals.isDesktop = ua.device.type === undefined;
+  res.locals.isPhone = ua.device.type === "mobile";
+  res.locals.isTablet = ua.device.type === "tablet";
+
   res.locals.ctx = {
     endpoint: process.env.PRISMIC_ENDPOINT,
     linkResolver: handleLinkResolver,

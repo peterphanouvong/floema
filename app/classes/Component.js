@@ -37,13 +37,9 @@ class Component extends EventEmitter {
     });
   }
 
-  addEventListeners() {
-    console.log("add event listeners");
-  }
+  addEventListeners() {}
 
-  removeEventListeners() {
-    console.log("remove event listeners");
-  }
+  removeEventListeners() {}
 }
 
 export default Component;

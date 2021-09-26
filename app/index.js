@@ -1,21 +1,27 @@
+import each from "lodash/each";
+
 import About from "./pages/About";
 import Collections from "./pages/Collections";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
 
-import each from "lodash/each";
-import Preloader from "./components/Preloader";
+import Canvas from "./components/Canvas";
 import Navigation from "./components/Navigation";
+import Preloader from "./components/Preloader";
 
 class App {
   constructor() {
     this.createContent();
+
     this.createPreloader();
     this.createNavigation();
+    this.createCanvas();
     this.createPages();
 
     this.addLinkListeners();
+    this.addEventListeners();
 
+    this.onResize();
     this.update();
   }
 
@@ -30,6 +36,10 @@ class App {
   createPreloader() {
     this.preloader = new Preloader();
     this.preloader.once("completed", this.onPreloaded.bind(this));
+  }
+
+  createCanvas() {
+    this.canvas = new Canvas();
   }
 
   createContent() {
@@ -53,6 +63,9 @@ class App {
     if (this.page && this.page.update) {
       this.page.update();
     }
+    if (this.canvas && this.canvas.update) {
+      this.canvas.update();
+    }
     this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
 
@@ -65,13 +78,15 @@ class App {
     this.page.show();
   }
 
-  async onChange(url) {
+  async onChange({ url, push = true }) {
     this.page.hide();
     const res = await window.fetch(url);
 
     if (res.status === 200) {
       const html = await res.text();
       const div = document.createElement("div");
+
+      if (push) window.history.pushState({}, "", url);
 
       div.innerHTML = html;
 
@@ -95,6 +110,50 @@ class App {
     }
   }
 
+  onResize() {
+    if (this.canvas && this.canvas.onResize) {
+      this.canvas.onResize();
+    }
+    if (this.page && this.page.onResize) {
+      this.page.onResize();
+    }
+  }
+
+  onPopState() {
+    this.onChange({ url: window.location.pathname, push: false });
+  }
+
+  onTouchDown(event) {
+    if (this.canvas && this.canvas.onTouchDown) {
+      this.canvas.onTouchDown(event);
+    }
+  }
+
+  onTouchMove(event) {
+    if (this.canvas && this.canvas.onTouchMove) {
+      this.canvas.onTouchMove(event);
+    }
+  }
+
+  onTouchUp(event) {
+    if (this.canvas && this.canvas.onTouchUp) {
+      this.canvas.onTouchUp(event);
+    }
+  }
+
+  addEventListeners() {
+    window.addEventListener("mousedown", this.onTouchDown.bind(this));
+    window.addEventListener("mousemove", this.onTouchMove.bind(this));
+    window.addEventListener("mouseup", this.onTouchUp.bind(this));
+
+    window.addEventListener("touchstart", this.onTouchDown.bind(this));
+    window.addEventListener("touchmove", this.onTouchMove.bind(this));
+    window.addEventListener("touchend", this.onTouchUp.bind(this));
+
+    window.addEventListener("resize", this.onResize.bind(this));
+    window.addEventListener("popstate", this.onPopState.bind(this));
+  }
+
   addLinkListeners() {
     const links = document.querySelectorAll("a");
     each(links, (link) => {
@@ -102,7 +161,7 @@ class App {
         event.preventDefault();
         const { href } = link;
 
-        this.onChange(href);
+        this.onChange({ url: href });
       };
     });
   }

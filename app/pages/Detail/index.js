@@ -14,7 +14,6 @@ class Detail extends Page {
 
   create() {
     super.create();
-    console.log(this.elements.button);
     this.link = new Button(this.elements.button);
   }
 
