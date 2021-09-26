@@ -6,8 +6,6 @@ class Highlight extends Animation {
   constructor({ element, elements }) {
     super({ element, elements });
     this.elementLabel = this.element.querySelector(".about__highlight__label");
-
-    console.log("element Label", this.elementLabel);
   }
 
   animateIn() {

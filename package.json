@@ -47,7 +47,9 @@
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
+    "ogl": "^0.0.76",
     "prismic-dom": "^2.2.6",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "ua-parser-js": "^0.7.28"
   }
 }

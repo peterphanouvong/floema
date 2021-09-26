@@ -17,7 +17,6 @@ class Home extends Page {
 
   create() {
     super.create();
-    console.log(this.elements);
     this.link = new Button(this.elements.button);
   }
 
