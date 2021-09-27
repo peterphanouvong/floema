@@ -8,6 +8,7 @@ export default class {
     this.gl = gl;
     this.sizes = sizes;
     this.group = new Transform();
+    this.scene = scene;
 
     this.galleryElement = document.querySelector(".home_gallery");
     this.mediasElements = document.querySelectorAll(
@@ -16,6 +17,7 @@ export default class {
 
     this.createGeometry();
     this.createGallery();
+    this.show();
 
     this.group.setParent(scene);
 
@@ -35,6 +37,17 @@ export default class {
       x: 0,
       y: 0,
     };
+  }
+
+  /**
+   * Animations.
+   */
+
+  show() {
+    map(this.medias, (media) => media.show());
+  }
+  hide() {
+    map(this.medias, (media) => media.hide());
   }
 
   createGeometry() {
@@ -58,24 +71,24 @@ export default class {
    * Events
    */
 
-  onWheel({pixelX, pixelY}) {
+  onWheel({ pixelX, pixelY }) {
     this.x.target += pixelX;
-    this.y.target += pixelY
+    this.y.target += pixelY;
   }
 
   onResize(event) {
-    map(this.medias, (media) => media.onResize(event));
-
     this.galleryBounds = this.galleryElement.getBoundingClientRect();
 
     this.sizes = event.sizes;
+
+    map(this.medias, (media) => media.onResize(event));
   }
 
   onTouchDown({ x, y }) {}
 
   onTouchMove({ x, y }) {
-    this.x.target += (x.start - x.end)/20;
-    this.y.target += (y.start - y.end)/20;
+    this.x.target += (x.start - x.end) / 20;
+    this.y.target += (y.start - y.end) / 20;
   }
 
   onTouchUp({ x, y }) {}
@@ -162,5 +175,14 @@ export default class {
 
       media.update(this.scroll);
     });
+  }
+
+  /**
+   * Destroy
+   */
+
+  destroy() {
+    console.log("destrpy home");
+    this.scene.removeChild(this.group);
   }
 }

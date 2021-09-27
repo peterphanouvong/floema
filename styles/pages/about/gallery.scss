@@ -3,6 +3,9 @@
   margin: 20rem 0;
   overflow: hidden;
   position: relative;
+  visibility: hidden;
+  pointer-events: none;
+  width: 272.3rem;
 
   &:first-child {
     margin-top: 0;

@@ -1,6 +1,7 @@
 import { Mesh, Program, Texture } from "ogl";
-import vertex from "../../shaders/plane-vertex.glsl";
-import fragment from "../../shaders/plane-fragment.glsl";
+import vertex from "shaders/plane-vertex.glsl";
+import fragment from "shaders/plane-fragment.glsl";
+import gsap from "gsap";
 
 export default class {
   constructor({ element, gl, geometry, scene, index, sizes }) {
@@ -38,6 +39,9 @@ export default class {
         tMap: {
           value: this.texture,
         },
+        uAlpha: {
+          value: 1,
+        },
       },
     });
   }
@@ -67,6 +71,27 @@ export default class {
    */
   onResize(sizes) {
     this.createBounds(sizes);
+  }
+
+  /**
+   * Animations.
+   */
+  show() {
+    gsap.fromTo(
+      this.program.uniforms.uAlpha,
+      {
+        value: 0,
+      },
+      {
+        value: 1,
+      }
+    );
+  }
+
+  hide() {
+    gsap.to(this.program.uniforms.uAlpha, {
+      value: 0,
+    });
   }
 
   /**

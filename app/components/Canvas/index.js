@@ -1,9 +1,11 @@
-import { Camera, Renderer, Transform, Box, Program, Mesh } from "ogl";
-
+import { Camera, Renderer, Transform } from "ogl";
+import About from "./About";
 import Home from "./Home";
 
 export default class Canvas {
-  constructor() {
+  constructor({ template }) {
+    this.template = template;
+
     this.x = {
       start: 0,
       end: 0,
@@ -18,10 +20,9 @@ export default class Canvas {
     this.createCamera();
     this.createScene();
     this.onResize();
+    this.onChange(template);
 
     this.isDown = false;
-
-    this.createHome();
   }
 
   createRenderer() {
@@ -41,6 +42,10 @@ export default class Canvas {
 
   createHome() {
     this.home = new Home({ gl: this.gl, scene: this.scene });
+  }
+
+  createAbout() {
+    this.about = new About({ gl: this.gl, scene: this.scene });
   }
 
   /**
@@ -66,11 +71,52 @@ export default class Canvas {
         sizes: this.sizes,
       });
     }
+
+    if (this.about) {
+      this.about.onResize({
+        sizes: this.sizes,
+      });
+    }
+  }
+
+  onChangeStart() {
+    if (this.home) {
+      this.home.hide();
+    }
+
+    if (this.about) {
+      this.about.hide();
+    }
+  }
+
+  onChange(template) {
+    console.log("template:", template);
+    if (template === "home") {
+      this.createHome();
+    } else {
+      if (this.home) {
+        this.home.destroy();
+        this.home = null;
+      }
+    }
+
+    if (template === "about") {
+      this.createAbout();
+    } else {
+      if (this.about) {
+        this.about.destroy();
+        this.about = null;
+      }
+    }
   }
 
   onWheel(event) {
-    if(this.home) {
+    if (this.home) {
       this.home.onWheel(event);
+    }
+
+    if (this.about) {
+      this.about.onWheel(event);
     }
   }
 
@@ -81,6 +127,13 @@ export default class Canvas {
 
     if (this.home) {
       this.home.onTouchDown({
+        x: this.x,
+        y: this.y,
+      });
+    }
+
+    if (this.about) {
+      this.about.onTouchDown({
         x: this.x,
         y: this.y,
       });
@@ -101,6 +154,13 @@ export default class Canvas {
         y: this.y,
       });
     }
+
+    if (this.about) {
+      this.about.onTouchMove({
+        x: this.x,
+        y: this.y,
+      });
+    }
   }
 
   onTouchUp(event) {
@@ -114,21 +174,18 @@ export default class Canvas {
 
     this.x.end = x;
     this.y.end = y;
-
-    if (this.home) {
-      this.home.onTouchDown({
-        x: this.x,
-        y: this.y,
-      });
-    }
   }
 
   /**
    * Update.
    */
-  update() {
+  update(scroll) {
     if (this.home) {
       this.home.update();
+    }
+
+    if (this.about) {
+      this.about.update(scroll);
     }
     this.renderer.render({
       camera: this.camera,

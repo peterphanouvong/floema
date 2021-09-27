@@ -16,8 +16,8 @@ class App {
 
     this.createPreloader();
     this.createNavigation();
-    this.createCanvas();
     this.createPages();
+    this.createCanvas();
 
     this.addLinkListeners();
     this.addEventListeners();
@@ -40,7 +40,7 @@ class App {
   }
 
   createCanvas() {
-    this.canvas = new Canvas();
+    this.canvas = new Canvas({ template: this.template });
   }
 
   createContent() {
@@ -65,7 +65,7 @@ class App {
       this.page.update();
     }
     if (this.canvas && this.canvas.update) {
-      this.canvas.update();
+      this.canvas.update(this.page.scroll);
     }
     this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
@@ -80,6 +80,7 @@ class App {
   }
 
   async onChange({ url, push = true }) {
+    this.canvas.onChangeStart();
     this.page.hide();
     const res = await window.fetch(url);
 
@@ -100,10 +101,15 @@ class App {
       this.content.setAttribute("data-template", this.template);
 
       this.content.innerHTML = divContent.innerHTML;
+      this.canvas.onChange(this.template);
 
       this.page = this.pages[this.template];
       this.page.create();
+
+      this.onResize();
       this.page.show();
+
+      // this.createCanvas();
 
       this.addLinkListeners();
     } else {
@@ -143,7 +149,7 @@ class App {
   }
 
   onWheel(event) {
-    const normalizedWheel = normalizeWheel(event)
+    const normalizedWheel = normalizeWheel(event);
 
     if (this.page && this.page.onWheel) {
       this.page.onWheel(normalizedWheel);
@@ -154,7 +160,7 @@ class App {
   }
 
   addEventListeners() {
-    window.addEventListener("mousewheel", this.onWheel.bind(this))
+    window.addEventListener("mousewheel", this.onWheel.bind(this));
 
     window.addEventListener("mousedown", this.onTouchDown.bind(this));
     window.addEventListener("mousemove", this.onTouchMove.bind(this));
