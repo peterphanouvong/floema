@@ -58,6 +58,11 @@ export default class {
    * Events
    */
 
+  onWheel({pixelX, pixelY}) {
+    this.x.target += pixelX;
+    this.y.target += pixelY
+  }
+
   onResize(event) {
     map(this.medias, (media) => media.onResize(event));
 
@@ -69,8 +74,8 @@ export default class {
   onTouchDown({ x, y }) {}
 
   onTouchMove({ x, y }) {
-    this.x.target += x.start - x.end;
-    this.y.target += y.start - y.end;
+    this.x.target += (x.start - x.end)/20;
+    this.y.target += (y.start - y.end)/20;
   }
 
   onTouchUp({ x, y }) {}

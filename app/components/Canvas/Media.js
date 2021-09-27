@@ -85,7 +85,7 @@ export default class {
     this.mesh.position.x =
       -this.sizes.width / 2 +
       this.mesh.scale.x / 2 +
-      ((this.bounds.left - x / 25) / window.innerWidth) * this.sizes.width +
+      ((this.bounds.left - x) / window.innerWidth) * this.sizes.width +
       this.extra.x;
   }
 
@@ -93,7 +93,7 @@ export default class {
     this.mesh.position.y =
       this.sizes.height / 2 -
       this.mesh.scale.y / 2 -
-      ((this.bounds.top - y / 25) / window.innerHeight) * this.sizes.height -
+      ((this.bounds.top - y) / window.innerHeight) * this.sizes.height -
       this.extra.y;
   }
 

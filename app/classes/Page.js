@@ -1,7 +1,6 @@
 import GSAP from "gsap";
 import each from "lodash/each";
 import map from "lodash/map";
-import normalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
 import Highlight from "../animations/Highlight";
 import Paragraph from "../animations/Paragraph";
@@ -147,7 +146,7 @@ class Page {
     this.scroll.current = GSAP.utils.interpolate(
       this.scroll.current,
       this.scroll.target,
-      0.15
+      0.1
     );
 
     if (this.scroll.current < 0.01) this.scroll.current = 0;
@@ -174,18 +173,18 @@ class Page {
     each(this.animations, (animation) => animation.onResize());
   }
 
-  onMouseWheel(e) {
-    const { pixelY } = normalizeWheel(e);
+
+  onWheel({pixelY}) {
     this.scroll.target += pixelY;
   }
 
   addEventListeners() {
-    window.addEventListener("mousewheel", this.onMouseWheel.bind(this));
+    // window.addEventListener("mousewheel", this.onWheel.bind(this));
     window.addEventListener("resize", this.onResize.bind(this));
   }
 
   removeEventListeners() {
-    window.removeEventListener("mousewheel", this.onMouseWheel.bind(this));
+    // window.removeEventListener("mousewheel", this.onWheel.bind(this));
     window.removeEventListener("resize", this.onResize.bind(this));
   }
 }

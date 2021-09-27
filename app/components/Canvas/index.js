@@ -68,6 +68,12 @@ export default class Canvas {
     }
   }
 
+  onWheel(event) {
+    if(this.home) {
+      this.home.onWheel(event);
+    }
+  }
+
   onTouchDown(event) {
     this.isDown = true;
     this.x.start = event.touches ? event.touches[0].clientX : event.clientX;
