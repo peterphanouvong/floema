@@ -3,6 +3,8 @@
   @include media("<phone") {
     display: none;
   }
+
+  transition: transform 1s ease;
 }
 .collections__titles__label {
   @extend %vertical__titles__label;

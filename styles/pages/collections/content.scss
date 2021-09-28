@@ -11,9 +11,11 @@
   left: 8rem;
   opacity: 0;
   position: absolute;
+  transition: 0.4s opacity ease;
 
   &--active {
     opacity: 1;
+    transition: 0.4s 0.2s opacity ease;
   }
 }
 

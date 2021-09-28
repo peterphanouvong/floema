@@ -1,5 +1,6 @@
 import { Camera, Renderer, Transform } from "ogl";
 import About from "./About";
+import Collections from "./Collections";
 import Home from "./Home";
 
 export default class Canvas {
@@ -20,7 +21,7 @@ export default class Canvas {
     this.createCamera();
     this.createScene();
     this.onResize();
-    this.onChange(template);
+    // this.onChange(template);
 
     this.isDown = false;
   }
@@ -40,17 +41,64 @@ export default class Canvas {
     this.scene = new Transform();
   }
 
+  /**
+   * Home
+   */
+
   createHome() {
     this.home = new Home({ gl: this.gl, scene: this.scene });
   }
+
+  destroyHome() {
+    if (this.home) {
+      this.home.destroy();
+      this.home = null;
+    }
+  }
+
+  /**
+   * About
+   */
 
   createAbout() {
     this.about = new About({ gl: this.gl, scene: this.scene });
   }
 
+  destroyAbout() {
+    if (this.about) {
+      this.about.destroy();
+      this.about = null;
+    }
+  }
+
+  /**
+   * Collections
+   */
+
+  createCollections() {
+    this.collections = new Collections({
+      gl: this.gl,
+      scene: this.scene,
+      sizes: this.sizes,
+    });
+  }
+
+  destroyCollections() {
+    if (this.collections) {
+      this.collections.destroy();
+      this.collections = null;
+    }
+  }
+
   /**
    * Events.
    */
+
+  onPreloaded() {
+    this.onChange(this.template);
+    this.onResize();
+  }
+
   onResize() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.camera.perspective({
@@ -77,6 +125,12 @@ export default class Canvas {
         sizes: this.sizes,
       });
     }
+
+    if (this.collections) {
+      this.collections.onResize({
+        sizes: this.sizes,
+      });
+    }
   }
 
   onChangeStart() {
@@ -87,6 +141,10 @@ export default class Canvas {
     if (this.about) {
       this.about.hide();
     }
+
+    if (this.collections) {
+      this.collections.hide();
+    }
   }
 
   onChange(template) {
@@ -94,19 +152,19 @@ export default class Canvas {
     if (template === "home") {
       this.createHome();
     } else {
-      if (this.home) {
-        this.home.destroy();
-        this.home = null;
-      }
+      this.destroyHome();
     }
 
     if (template === "about") {
       this.createAbout();
     } else {
-      if (this.about) {
-        this.about.destroy();
-        this.about = null;
-      }
+      this.destroyAbout();
+    }
+
+    if (template === "collections") {
+      this.createCollections();
+    } else {
+      this.destroyCollections();
     }
   }
 
@@ -117,6 +175,10 @@ export default class Canvas {
 
     if (this.about) {
       this.about.onWheel(event);
+    }
+
+    if (this.collections) {
+      this.collections.onWheel(event);
     }
   }
 
@@ -134,6 +196,13 @@ export default class Canvas {
 
     if (this.about) {
       this.about.onTouchDown({
+        x: this.x,
+        y: this.y,
+      });
+    }
+
+    if (this.collections) {
+      this.collections.onTouchDown({
         x: this.x,
         y: this.y,
       });
@@ -157,6 +226,13 @@ export default class Canvas {
 
     if (this.about) {
       this.about.onTouchMove({
+        x: this.x,
+        y: this.y,
+      });
+    }
+
+    if (this.collections) {
+      this.collections.onTouchMove({
         x: this.x,
         y: this.y,
       });
@@ -187,6 +263,11 @@ export default class Canvas {
     if (this.about) {
       this.about.update(scroll);
     }
+
+    if (this.collections) {
+      this.collections.update();
+    }
+
     this.renderer.render({
       camera: this.camera,
       scene: this.scene,

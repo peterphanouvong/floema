@@ -23,12 +23,9 @@ export default class {
   }
 
   createTexture() {
-    this.texture = new Texture(this.gl);
-
-    this.img = new Image();
-    this.img.crossOrigin = "anonymous";
-    this.img.src = this.element.firstChild.getAttribute("data-src");
-    this.img.onload = () => (this.texture.image = this.img);
+    console.log("about", this.element.childNodes[0].getAttribute("data-src"));
+    this.texture =
+      window.TEXTURES[this.element.childNodes[0].getAttribute("data-src")];
   }
 
   createProgram() {

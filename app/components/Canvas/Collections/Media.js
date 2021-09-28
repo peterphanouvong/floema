@@ -35,7 +35,7 @@ export default class {
           value: this.texture,
         },
         uAlpha: {
-          value: 0,
+          value: 1,
         },
       },
     });
@@ -78,7 +78,7 @@ export default class {
         value: 0,
       },
       {
-        value: 0.4,
+        value: 1,
       }
     );
   }
@@ -105,8 +105,7 @@ export default class {
     this.mesh.position.x =
       -this.sizes.width / 2 +
       this.mesh.scale.x / 2 +
-      ((this.bounds.left - x) / window.innerWidth) * this.sizes.width +
-      this.extra.x;
+      ((this.bounds.left - x) / window.innerWidth) * this.sizes.width;
   }
 
   updateY(y = 0) {

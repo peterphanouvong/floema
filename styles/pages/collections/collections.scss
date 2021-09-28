@@ -1,5 +1,6 @@
 .collections {
   @extend %page;
+  z-index: 0;
 }
 .collections__wrapper {
   @extend %cover;

@@ -46,6 +46,7 @@ export default class {
   show() {
     map(this.medias, (media) => media.show());
   }
+
   hide() {
     map(this.medias, (media) => media.hide());
   }

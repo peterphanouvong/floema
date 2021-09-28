@@ -59,10 +59,48 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 const handleDefaults = async (api) => {
+  const about = await api.getSingle("about");
+  const home = await api.getSingle("home");
   const meta = await api.getSingle("metadata");
   const preloader = await api.getSingle("preloader");
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at("document.type", "collection"),
+    {
+      fetchLinks: "product.image",
+    }
+  );
+
+  let assets = [];
+
+  home.data.gallery.forEach((item) => {
+    assets.push(item.image.url);
+  });
+
+  about.data.gallery.forEach((item) => {
+    assets.push(item.image.url);
+  });
+
+  about.data.body.forEach((section) => {
+    if (section.slice_type === "gallery") {
+      section.items.forEach((item) => {
+        assets.push(item.image.url);
+      });
+    }
+  });
+
+  collections.forEach((collection) => {
+    collection.data.products.forEach((item) => {
+      assets.push(item.products_product.data.image.url);
+    });
+  });
+
+  console.log(assets);
 
   return {
+    about,
+    assets,
+    collections,
+    home,
     meta,
     preloader,
   };
@@ -70,7 +108,6 @@ const handleDefaults = async (api) => {
 
 app.get("/", async (req, res) => {
   const api = await initApi(req);
-  const home = await api.getSingle("home");
   const defaults = await handleDefaults(api);
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
@@ -82,26 +119,20 @@ app.get("/", async (req, res) => {
   res.render("pages/home", {
     ...defaults,
     collections,
-    home,
   });
 });
 
 app.get("/about", async (req, res) => {
   const api = await initApi(req);
-  const about = await api.getSingle("about");
   const defaults = await handleDefaults(api);
-
-  console.log(about.data.body);
 
   res.render("pages/about", {
     ...defaults,
-    about,
   });
 });
 
 app.get("/collections", async (req, res) => {
   const api = await initApi(req);
-  const home = await api.getSingle("home");
   const defaults = await handleDefaults(api);
 
   const { results: collections } = await api.query(
@@ -114,7 +145,6 @@ app.get("/collections", async (req, res) => {
   res.render("pages/collections", {
     ...defaults,
     collections,
-    home,
   });
 });
 

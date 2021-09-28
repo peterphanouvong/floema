@@ -9,6 +9,7 @@ html {
   @extend %cover;
   font-size: calc(100vw / 1920) * 10;
   position: fixed;
+  background-color: $color-contessa;
   @include media(">desktop") {
     font-size: 10px;
   }
@@ -62,4 +63,10 @@ img {
     overflow: hidden;
     vertical-align: top;
   }
+}
+
+canvas {
+  pointer-events: none;
+  position: relative;
+  z-index: z("canvas");
 }

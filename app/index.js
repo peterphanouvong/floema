@@ -14,10 +14,10 @@ class App {
   constructor() {
     this.createContent();
 
+    this.createCanvas();
     this.createPreloader();
     this.createNavigation();
     this.createPages();
-    this.createCanvas();
 
     this.addLinkListeners();
     this.addEventListeners();
@@ -35,7 +35,7 @@ class App {
   }
 
   createPreloader() {
-    this.preloader = new Preloader();
+    this.preloader = new Preloader({ canvas: this.canvas });
     this.preloader.once("completed", this.onPreloaded.bind(this));
   }
 
@@ -76,6 +76,7 @@ class App {
 
   onPreloaded() {
     this.preloader.destroy();
+    this.canvas.onPreloaded();
     this.page.show();
   }
 
