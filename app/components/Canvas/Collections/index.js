@@ -5,11 +5,13 @@ import gsap from "gsap";
 import Prefix from "prefix";
 
 export default class {
-  constructor({ gl, scene, sizes }) {
+  constructor({ gl, scene, sizes, transition }) {
+    this.id = "collections";
     this.gl = gl;
     this.sizes = sizes;
     this.group = new Transform();
     this.scene = scene;
+    this.transition = transition;
 
     this.transformPrefix = Prefix("transform");
     this.galleryElement = document.querySelector(".collections__gallery");
@@ -48,6 +50,10 @@ export default class {
    */
 
   show() {
+    if (this.transition) {
+      this.transition.animate(this.medias[0].mesh, () => {});
+    }
+
     map(this.medias, (media) => media.show());
   }
 
@@ -140,10 +146,6 @@ export default class {
       this.transformPrefix
     ] = `translateX(-${this.x.current}px)`;
 
-    map(this.medias, (media, index) => {
-      media.update(this.scroll);
-    });
-
     const index = Math.round(
       (this.x.current / (this.x.limit + this.medias[0].element.clientWidth)) *
         this.medias.length
@@ -154,6 +156,10 @@ export default class {
 
       this.index = index;
     }
+
+    map(this.medias, (media) => {
+      media.update(this.scroll, this.index);
+    });
   }
 
   /**

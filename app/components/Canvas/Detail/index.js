@@ -1,26 +1,29 @@
-import { Mesh, Program, Texture } from "ogl";
-import vertex from "shaders/home-vertex.glsl";
-import fragment from "shaders/home-fragment.glsl";
+import { Mesh, Program, Plane } from "ogl";
+import vertex from "shaders/plane-vertex.glsl";
+import fragment from "shaders/plane-fragment.glsl";
 import gsap from "gsap";
 
 export default class {
-  constructor({ element, gl, geometry, scene, index, sizes }) {
-    this.element = element;
+  constructor({ gl, scene, sizes, transition }) {
+    this.id = "detail";
+    this.element = document.querySelector(".detail__media__image");
     this.gl = gl;
-    this.geometry = geometry;
     this.scene = scene;
-    this.index = index;
     this.sizes = sizes;
-    this.speed = 0;
+    this.transition = transition;
+
+    // console.log("detail sizes", this.sizes);
+
+    this.geometry = new Plane(this.gl);
 
     this.createTexture();
     this.createProgram();
     this.createMesh();
+    this.createBounds({ sizes: this.sizes });
 
-    this.extra = {
-      x: 0,
-      y: 0,
-    };
+    // this.onResize(sizes);
+
+    this.show();
   }
 
   createTexture() {
@@ -38,12 +41,6 @@ export default class {
         uAlpha: {
           value: 0,
         },
-        uViewportSizes: {
-          value: [this.sizes.width, this.sizes.height],
-        },
-        uSpeed: {
-          value: 0,
-        },
       },
     });
   }
@@ -55,8 +52,6 @@ export default class {
     });
 
     this.mesh.setParent(this.scene);
-
-    this.mesh.position.x += this.index * this.mesh.scale.x;
   }
 
   createBounds({ sizes }) {
@@ -72,29 +67,28 @@ export default class {
    * Events.
    */
   onResize(sizes) {
-    this.createBounds(sizes);
+    this.createBounds({ sizes: this.sizes });
+    this.updateX();
+    this.updateY();
   }
 
   /**
    * Animations.
    */
   show() {
-    gsap.fromTo(
-      this.program.uniforms.uAlpha,
-      {
-        value: 0,
-      },
-      {
-        value: 0.4,
-      }
-    );
+    if (this.transition) {
+      this.transition.animate(this.mesh, () => {
+        this.program.uniforms.uAlpha.value = 1;
+      });
+    } else {
+      gsap.to(this.program.uniforms.uAlpha, {
+        value: 1,
+        duration: 1,
+      });
+    }
   }
 
-  hide() {
-    gsap.to(this.program.uniforms.uAlpha, {
-      value: 0,
-    });
-  }
+  hide() {}
 
   /**
    * Loop.
@@ -106,28 +100,34 @@ export default class {
 
     this.mesh.scale.x = this.sizes.width * this.width;
     this.mesh.scale.y = this.sizes.height * this.height;
+
+    console.log(this.sizes.width, this.width);
   }
 
-  updateX(x = 0) {
+  updateX() {
     this.mesh.position.x =
       -this.sizes.width / 2 +
       this.mesh.scale.x / 2 +
-      ((this.bounds.left - x) / window.innerWidth) * this.sizes.width +
-      this.extra.x;
+      (this.bounds.left / window.innerWidth) * this.sizes.width;
   }
 
-  updateY(y = 0) {
+  updateY() {
     this.mesh.position.y =
       this.sizes.height / 2 -
       this.mesh.scale.y / 2 -
-      ((this.bounds.top - y) / window.innerHeight) * this.sizes.height -
-      this.extra.y;
+      (this.bounds.top / window.innerHeight) * this.sizes.height;
+
+    this.mesh.position.y +=
+      Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 -
+      40;
   }
 
-  update(scroll, speed) {
-    this.updateX(scroll.x);
-    this.updateY(scroll.y);
+  update() {
+    if (!this.bounds) this.updateX();
+    this.updateY();
+  }
 
-    this.program.uniforms.uSpeed.value = speed / 500;
+  destroy() {
+    this.scene.removeChild(this.mesh);
   }
 }

@@ -81,7 +81,7 @@ class App {
   }
 
   async onChange({ url, push = true }) {
-    this.canvas.onChangeStart();
+    this.canvas.onChangeStart(url);
     this.page.hide();
     const res = await window.fetch(url);
 

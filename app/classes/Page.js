@@ -97,24 +97,28 @@ class Page {
     this.animations.push(...this.animationsHighlights);
   }
 
-  show() {
+  show(animation) {
     return new Promise((resolve) => {
       ColorsManager.change({
         backgroundColor: this.element.getAttribute("data-background"),
         color: this.element.getAttribute("data-color"),
       });
 
-      this.animateIn = GSAP.timeline();
+      if (animation) {
+        this.animateIn = animation;
+      } else {
+        this.animateIn = GSAP.timeline();
 
-      this.animateIn.fromTo(
-        this.element,
-        {
-          autoAlpha: 0,
-        },
-        {
-          autoAlpha: 1,
-        }
-      );
+        this.animateIn.fromTo(
+          this.element,
+          {
+            autoAlpha: 0,
+          },
+          {
+            autoAlpha: 1,
+          }
+        );
+      }
 
       this.animateIn.call((_) => {
         this.addEventListeners();
@@ -173,8 +177,7 @@ class Page {
     each(this.animations, (animation) => animation.onResize());
   }
 
-
-  onWheel({pixelY}) {
+  onWheel({ pixelY }) {
     this.scroll.target += pixelY;
   }
 

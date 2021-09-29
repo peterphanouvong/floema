@@ -1,4 +1,5 @@
 import Page from "classes/Page";
+import gsap from "gsap";
 import Button from "../../components/Button";
 
 class Detail extends Page {
@@ -20,6 +21,22 @@ class Detail extends Page {
   destroy() {
     super.destroy();
     this.link.removeEventListeners();
+  }
+
+  show() {
+    const timeline = gsap.timeline({ delay: 2 });
+
+    timeline.fromTo(
+      this.element,
+      {
+        autoAlpha: 0,
+      },
+      {
+        autoAlpha: 1,
+      }
+    );
+
+    super.show(timeline);
   }
 }
 

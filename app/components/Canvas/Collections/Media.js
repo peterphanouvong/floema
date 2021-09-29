@@ -1,4 +1,4 @@
-import { Mesh, Program, Texture } from "ogl";
+import { Mesh, Program } from "ogl";
 import vertex from "shaders/plane-vertex.glsl";
 import fragment from "shaders/plane-fragment.glsl";
 import gsap from "gsap";
@@ -15,10 +15,13 @@ export default class {
     this.createTexture();
     this.createProgram();
     this.createMesh();
+    this.createBounds({ sizes: this.sizes });
 
-    this.extra = {
-      x: 0,
-      y: 0,
+    this.opacity = {
+      current: 0,
+      target: 0,
+      lerp: 0.1,
+      multiplier: 0,
     };
   }
 
@@ -73,19 +76,19 @@ export default class {
    */
   show() {
     gsap.fromTo(
-      this.program.uniforms.uAlpha,
+      this.opacity,
       {
-        value: 0,
+        multiplier: 0,
       },
       {
-        value: 1,
+        multiplier: 1,
       }
     );
   }
 
   hide() {
-    gsap.to(this.program.uniforms.uAlpha, {
-      value: 0,
+    gsap.to(this.opacity, {
+      multiplier: 0,
     });
   }
 
@@ -112,12 +115,25 @@ export default class {
     this.mesh.position.y =
       this.sizes.height / 2 -
       this.mesh.scale.y / 2 -
-      ((this.bounds.top - y) / window.innerHeight) * this.sizes.height -
-      this.extra.y;
+      ((this.bounds.top - y) / window.innerHeight) * this.sizes.height;
+
+    this.mesh.position.y +=
+      Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 -
+      40;
   }
 
-  update(scroll) {
+  update(scroll, index) {
     this.updateX(scroll.x);
     this.updateY(scroll.y);
+
+    this.opacity.target = this.index === index ? 1 : 0.4;
+    this.opacity.current = gsap.utils.interpolate(
+      this.opacity.current,
+      this.opacity.target,
+      this.opacity.lerp
+    );
+
+    this.program.uniforms.uAlpha.value =
+      this.opacity.current * this.opacity.multiplier;
   }
 }

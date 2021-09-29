@@ -52,7 +52,10 @@ export default class {
   }
 
   createGeometry() {
-    this.geometry = new Plane(this.gl);
+    this.geometry = new Plane(this.gl, {
+      heightSegments: 20,
+      widthSegments: 20,
+    });
   }
 
   createGallery() {
@@ -132,26 +135,19 @@ export default class {
     this.scroll.x = this.x.current;
     this.scroll.y = this.y.current;
 
+    this.y.target += 1;
+
     map(this.medias, (media, index) => {
       if (
         this.x.direction === "left" &&
         media.mesh.position.x + media.mesh.scale.x / 2 < -this.sizes.width / 2
       ) {
         media.extra.x += this.galleryWidth;
-
-        media.mesh.rotation.z = gsap.utils.random(
-          -Math.PI * 0.03,
-          Math.PI * 0.03
-        );
       } else if (
         this.x.direction === "right" &&
         media.mesh.position.x - media.mesh.scale.x / 2 > this.sizes.width / 2
       ) {
         media.extra.x -= this.galleryWidth;
-        media.mesh.rotation.z = gsap.utils.random(
-          -Math.PI * 0.03,
-          Math.PI * 0.03
-        );
       }
 
       if (
@@ -159,22 +155,16 @@ export default class {
         media.mesh.position.y + media.mesh.scale.y / 2 < -this.sizes.height / 2
       ) {
         media.extra.y -= this.galleryHeight;
-        media.mesh.rotation.z = gsap.utils.random(
-          -Math.PI * 0.03,
-          Math.PI * 0.03
-        );
       } else if (
         this.y.direction === "down" &&
         media.mesh.position.y - media.mesh.scale.y / 2 > this.sizes.height / 2
       ) {
         media.extra.y += this.galleryHeight;
-        media.mesh.rotation.z = gsap.utils.random(
-          -Math.PI * 0.03,
-          Math.PI * 0.03
-        );
       }
 
-      media.update(this.scroll);
+      const speed = this.y.target - this.y.current;
+
+      media.update(this.scroll, speed);
     });
   }
 
