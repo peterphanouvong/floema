@@ -173,7 +173,6 @@ export default class {
    */
 
   destroy() {
-    console.log("destrpy home");
     this.scene.removeChild(this.group);
   }
 }

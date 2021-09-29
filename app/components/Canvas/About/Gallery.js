@@ -84,8 +84,6 @@ export default class Gallery {
   onTouchMove({ x, y }) {
     const distance = (x.start - x.end) / 20;
 
-    console.log(distance);
-
     this.scroll.target += distance;
   }
 
@@ -144,7 +142,6 @@ export default class Gallery {
    * Destroy.
    */
   destroy() {
-    console.log("destroy gallery  ");
     this.scene.removeChild(this.group);
   }
 }

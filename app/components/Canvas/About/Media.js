@@ -23,7 +23,6 @@ export default class {
   }
 
   createTexture() {
-    console.log("about", this.element.childNodes[0].getAttribute("data-src"));
     this.texture =
       window.TEXTURES[this.element.childNodes[0].getAttribute("data-src")];
   }

@@ -12,8 +12,6 @@ export default class {
     this.sizes = sizes;
     this.transition = transition;
 
-    // console.log("detail sizes", this.sizes);
-
     this.geometry = new Plane(this.gl);
 
     this.createTexture();
@@ -100,8 +98,6 @@ export default class {
 
     this.mesh.scale.x = this.sizes.width * this.width;
     this.mesh.scale.y = this.sizes.height * this.height;
-
-    console.log(this.sizes.width, this.width);
   }
 
   updateX() {

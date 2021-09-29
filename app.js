@@ -94,8 +94,6 @@ const handleDefaults = async (api) => {
     });
   });
 
-  console.log(assets);
-
   return {
     about,
     assets,

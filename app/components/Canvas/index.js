@@ -199,8 +199,6 @@ export default class Canvas {
   }
 
   onChange(template) {
-    console.log("template:", template);
-
     if (template === "home") {
       this.createHome();
     } else {

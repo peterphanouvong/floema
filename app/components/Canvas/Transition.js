@@ -48,7 +48,6 @@ export default class Transition {
     if (element.id === "collections") {
       const { index, medias } = element;
       const media = medias[index];
-      console.log("Media", media);
 
       this.createProgram(media.texture);
       this.createMesh(media.mesh);

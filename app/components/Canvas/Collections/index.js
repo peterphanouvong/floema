@@ -99,7 +99,6 @@ export default class {
       translateY(-${250 * currentCollection}%)
       translate(-50%, -50%) rotate(-90deg)
     `;
-    console.log(currentCollection);
   }
 
   onWheel({ pixelX, pixelY }) {
@@ -167,7 +166,6 @@ export default class {
    */
 
   destroy() {
-    console.log("destrpy home");
     this.scene.removeChild(this.group);
   }
 }
